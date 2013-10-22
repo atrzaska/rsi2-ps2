@@ -44,42 +44,63 @@ public class CalculatorWS implements ICalculatorWS {
     @WebMethod
     @Oneway
     public void dodaj(double a, double b) {
+        // log
+        logger.log(Level.SEVERE, "dodaj start");
+
+        // headerList
         HeaderList headerList = (HeaderList) context.getMessageContext().get(JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
+ 
+        // replyTo
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-        
+    
+        // log
         logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        
+        // to
+        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+
+        // log
         logger.log(Level.SEVERE, "To: {0}", to);
 
-        // log
-        logger.log(Level.SEVERE, "rozpoczynam dodawanie liczb {1} i {2}.", new Object[]{a, b});
-
-        // sleep between 3 and 7 sec
-        SleepUtil.randomSleep();
-
-        // obliczenie wyniku
-        double result = a + b;
-
-        // log
-        logger.log(Level.SEVERE, "zakończyłem dodawnie liczb {1} i {2}.", new Object[]{a, b});
-
         if (!replyTo.isNone()) {
-//            String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//            client.CalculatorImplService service = new client.CalculatorImplService();
-//            client.CalculatorImpl portType = service.getCalculatorImplPort();
-//            WSBindingProvider bp = (WSBindingProvider) portType;
-//            bp.setAddress(replyTo.getAddress());
-//            bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-//            portType.callbackMessage(result, "dodawanie");
+            // log
+            logger.log(Level.SEVERE, "rozpoczynam dodawanie liczb {0} i {1}.", new Object[]{a, b});
+
+            // sleep between 3 and 7 sec
+            SleepUtil.randomSleep();
+
+            // obliczenie wyniku
+            double result = a + b;
+
+            // log
+            logger.log(Level.SEVERE, "zakończyłem dodawnie liczb {0} i {1}.", new Object[]{a, b});
 
             // send email message
             if (to.contains("mailto")) {
-                MailUtils.sendMail(email.substring(7), "wynik dodawania " + a + " i " + b + " jest " + result + " ");
+                // log
+                logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
+                
+                // log
+                logger.log(Level.SEVERE, "wysyłam email.");
+    
+                // send mail
+                MailUtils.sendMail(to.substring(7), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
+            } else {
+                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//                client.CalculatorImplService service = new client.CalculatorImplService();
+//                client.CalculatorImpl portType = service.getCalculatorImplPort();
+//                WSBindingProvider bp = (WSBindingProvider) portType;
+//                bp.setAddress(replyTo.getAddress());
+//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+//                portType.callbackMessage(result, "dodawanie");
             }
         } else {
             // log
             logger.log(Level.SEVERE, "Nie podano adresu zwrotnego.");
         }
+        
+        // log
+        logger.log(Level.SEVERE, "dodaj stop");
     }
 
     /**
@@ -91,6 +112,63 @@ public class CalculatorWS implements ICalculatorWS {
     @WebMethod
     @Oneway
     public void odejmij(double a, double b) {
+        // log
+        logger.log(Level.SEVERE, "odejmij start");
+
+        // headerList
+        HeaderList headerList = (HeaderList) context.getMessageContext().get(JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
+ 
+        // replyTo
+        WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+    
+        // log
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        
+        // to
+        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+
+        // log
+        logger.log(Level.SEVERE, "To: {0}", to);
+
+        if (!replyTo.isNone()) {
+            // log
+            logger.log(Level.SEVERE, "rozpoczynam odejmowanie liczb {0} i {1}.", new Object[]{a, b});
+
+            // sleep between 3 and 7 sec
+            SleepUtil.randomSleep();
+
+            // obliczenie wyniku
+            double result = a - b;
+
+            // log
+            logger.log(Level.SEVERE, "zakończyłem odejmowanie liczb {0} i {1}.", new Object[]{a, b});
+
+            // send email message
+            if (to.contains("mailto")) {
+                // log
+                logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
+                
+                // log
+                logger.log(Level.SEVERE, "wysyłam email.");
+    
+                // send mail
+                MailUtils.sendMail(to.substring(7), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
+            } else {
+                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//                client.CalculatorImplService service = new client.CalculatorImplService();
+//                client.CalculatorImpl portType = service.getCalculatorImplPort();
+//                WSBindingProvider bp = (WSBindingProvider) portType;
+//                bp.setAddress(replyTo.getAddress());
+//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+//                portType.callbackMessage(result, "dodawanie");
+            }
+        } else {
+            // log
+            logger.log(Level.SEVERE, "Nie podano adresu zwrotnego.");
+        }
+        
+        // log
+        logger.log(Level.SEVERE, "odejmij stop");
     }
 
     /**
@@ -102,6 +180,63 @@ public class CalculatorWS implements ICalculatorWS {
     @WebMethod
     @Oneway
     public void pomnoz(double a, double b) {
+        // log
+        logger.log(Level.SEVERE, "pomnoz start");
+
+        // headerList
+        HeaderList headerList = (HeaderList) context.getMessageContext().get(JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
+ 
+        // replyTo
+        WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+    
+        // log
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        
+        // to
+        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+
+        // log
+        logger.log(Level.SEVERE, "To: {0}", to);
+
+        if (!replyTo.isNone()) {
+            // log
+            logger.log(Level.SEVERE, "rozpoczynam mnozenie liczb {0} i {1}.", new Object[]{a, b});
+
+            // sleep between 3 and 7 sec
+            SleepUtil.randomSleep();
+
+            // obliczenie wyniku
+            double result = a * b;
+
+            // log
+            logger.log(Level.SEVERE, "zakończyłem mnozenie liczb {0} i {1}.", new Object[]{a, b});
+
+            // send email message
+            if (to.contains("mailto")) {
+                // log
+                logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
+                
+                // log
+                logger.log(Level.SEVERE, "wysyłam email.");
+    
+                // send mail
+                MailUtils.sendMail(to.substring(7), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
+            } else {
+                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//                client.CalculatorImplService service = new client.CalculatorImplService();
+//                client.CalculatorImpl portType = service.getCalculatorImplPort();
+//                WSBindingProvider bp = (WSBindingProvider) portType;
+//                bp.setAddress(replyTo.getAddress());
+//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+//                portType.callbackMessage(result, "dodawanie");
+            }
+        } else {
+            // log
+            logger.log(Level.SEVERE, "Nie podano adresu zwrotnego.");
+        }
+        
+        // log
+        logger.log(Level.SEVERE, "pomnoz stop");
     }
 
     /**
@@ -113,5 +248,75 @@ public class CalculatorWS implements ICalculatorWS {
     @WebMethod
     @Oneway
     public void podziel(double a, double b) {
+        // log
+        logger.log(Level.SEVERE, "podziel start");
+
+        // headerList
+        HeaderList headerList = (HeaderList) context.getMessageContext().get(JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
+ 
+        // replyTo
+        WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+    
+        // log
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        
+        // to
+        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+
+        // log
+        logger.log(Level.SEVERE, "To: {0}", to);
+
+        if (!replyTo.isNone()) {
+            // log
+            logger.log(Level.SEVERE, "rozpoczynam dzielenie liczb {0} i {1}.", new Object[]{a, b});
+
+            // sleep between 3 and 7 sec
+            SleepUtil.randomSleep();
+
+            // obliczenie wyniku
+            double result = 0;
+
+            if (b == 0) {
+                // log
+                logger.log(Level.SEVERE, "dzielenie przez 0!");
+                
+//                WSEndpointReference faultTo = headerList.getFaultTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//                String faultToAddress = faultTo.getAddress();
+//                if (faultToAddress.equals("http://localhost:8080/WS_ADDRESSING_RSI/FaultLoggingService")) {
+//                    log("dzielenie przez 0!!! ");
+//                }
+            } else {
+                result = a / b;
+            }
+
+            // log
+            logger.log(Level.SEVERE, "zakończyłem dzielenie liczb {0} i {1}.", new Object[]{a, b});
+
+            // send email message
+            if (to.contains("mailto")) {
+                // log
+                logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
+                
+                // log
+                logger.log(Level.SEVERE, "wysyłam email.");
+    
+                // send mail
+                MailUtils.sendMail(to.substring(7), "wynik dzielenia " + a + " i " + b + " wynosi " + result + " ");
+            } else {
+//                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//                client.CalculatorImplService service = new client.CalculatorImplService();
+//                client.CalculatorImpl portType = service.getCalculatorImplPort();
+//                WSBindingProvider bp = (WSBindingProvider) portType;
+//                bp.setAddress(replyTo.getAddress());
+//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+//                portType.callbackMessage(result, "dodawanie");
+            }
+        } else {
+            // log
+            logger.log(Level.SEVERE, "Nie podano adresu zwrotnego.");
+        }
+        
+        // log
+        logger.log(Level.SEVERE, "podziel stop");
     }
 }
