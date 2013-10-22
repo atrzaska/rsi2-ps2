@@ -5,9 +5,6 @@ import com.sun.xml.ws.api.addressing.AddressingVersion;
 import com.sun.xml.ws.api.addressing.WSEndpointReference;
 import com.sun.xml.ws.api.message.HeaderList;
 import com.sun.xml.ws.developer.JAXWSProperties;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -47,43 +44,41 @@ public class CalculatorWS implements ICalculatorWS {
     @WebMethod
     @Oneway
     public void dodaj(double a, double b) {
-        HeaderList headerList = (HeaderList) context.getMessageContext().get( JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
+        HeaderList headerList = (HeaderList) context.getMessageContext().get(JAXWSProperties.INBOUND_HEADER_LIST_PROPERTY);
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+        String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+        
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        logger.log(Level.SEVERE, "To: {0}", to);
 
-        logger.log(Level.SEVERE, "Adres reply to " + replyTo.getAddress());
-        logger.log(Level.SEVERE, "To " + headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11));
+        // log
+        logger.log(Level.SEVERE, "rozpoczynam dodawanie liczb {1} i {2}.", new Object[]{a, b});
 
-        String email = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+        // sleep between 3 and 7 sec
+        SleepUtil.randomSleep();
+
+        // obliczenie wyniku
+        double result = a + b;
+
+        // log
+        logger.log(Level.SEVERE, "zakończyłem dodawnie liczb {1} i {2}.", new Object[]{a, b});
 
         if (!replyTo.isNone()) {
-            String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+//            String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
 //            client.CalculatorImplService service = new client.CalculatorImplService();
 //            client.CalculatorImpl portType = service.getCalculatorImplPort();
 //            WSBindingProvider bp = (WSBindingProvider) portType;
 //            bp.setAddress(replyTo.getAddress());
 //            bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-
-            Date start = Calendar.getInstance().getTime();
-
-            logger.log(Level.SEVERE, "[{0}]: rozpoczynam dodawanie liczb {1} i {2}.", new Object[]{start, a, b});
-
-            double result = a + b;
-
 //            portType.callbackMessage(result, "dodawanie");
 
-            // sleep between 3 and 7 sec
-            SleepUtil.randomSleep();
-            
-            Date end = Calendar.getInstance().getTime();
- 
-            logger.log(Level.SEVERE, "[{0}]: zakończyłem dodawnie liczb {1} i {2}.", new Object[]{end, a, b});
-
             // send email message
-            if (email.contains("mailto")) {
+            if (to.contains("mailto")) {
                 MailUtils.sendMail(email.substring(7), "wynik dodawania " + a + " i " + b + " jest " + result + " ");
             }
         } else {
-            logger.log(Level.SEVERE, "NONE");
+            // log
+            logger.log(Level.SEVERE, "Nie podano adresu zwrotnego.");
         }
     }
 

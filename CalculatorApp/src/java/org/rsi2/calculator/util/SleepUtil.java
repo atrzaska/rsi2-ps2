@@ -3,7 +3,6 @@ package org.rsi2.calculator.util;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.rsi2.calculator.webservice.CalculatorWS;
 
 /**
  * SleepUtil
@@ -20,7 +19,7 @@ public class SleepUtil {
         try {
             Thread.sleep(delay);
         } catch (InterruptedException ex) {
-            Logger.getLogger(CalculatorWS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SleepUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
