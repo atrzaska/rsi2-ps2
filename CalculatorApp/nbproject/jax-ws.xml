@@ -48,6 +48,9 @@ made subject to such option by the copyright holder.
     <service name="CalculatorWS">
       <implementation-class>org.rsi2.calculator.webservice.CalculatorWS</implementation-class>
     </service>
+    <service name="CallbackWS">
+      <implementation-class>org.rsi2.calculator.webservice.CallbackWS</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
