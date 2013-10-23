@@ -88,13 +88,23 @@ public class CalculatorWS implements ICalculatorWS {
                 // send mail
                 MailUtils.sendMail(to.substring(7), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
             } else {
+                // log
+                logger.log(Level.SEVERE, "wysylam odpowiedz");
+
+                // get messageId
                 String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//                client.CalculatorImplService service = new client.CalculatorImplService();
-//                client.CalculatorImpl portType = service.getCalculatorImplPort();
-//                WSBindingProvider bp = (WSBindingProvider) portType;
-//                bp.setAddress(replyTo.getAddress());
-//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-//                portType.callbackMessage(result, "dodawanie");
+
+                // create webservice client
+                org.rsi2.calculator.clients.CallbackService callbackService = new org.rsi2.calculator.clients.CallbackService();
+                org.rsi2.calculator.clients.CallbackWS callbackWS = callbackService.getCallbackWSPort();
+
+                // bind address
+                WSBindingProvider wSBindingProvider = (WSBindingProvider) callbackWS;
+                wSBindingProvider.setAddress(replyTo.getAddress());
+                wSBindingProvider.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+
+                // wywolanie metody w serwisie
+                callbackWS.callback("wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
             }
         } else {
             // log
@@ -156,13 +166,23 @@ public class CalculatorWS implements ICalculatorWS {
                 // send mail
                 MailUtils.sendMail(to.substring(7), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
             } else {
+                // log
+                logger.log(Level.SEVERE, "wysylam odpowiedz");
+
+                // get messageId
                 String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//                client.CalculatorImplService service = new client.CalculatorImplService();
-//                client.CalculatorImpl portType = service.getCalculatorImplPort();
-//                WSBindingProvider bp = (WSBindingProvider) portType;
-//                bp.setAddress(replyTo.getAddress());
-//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-//                portType.callbackMessage(result, "dodawanie");
+
+                // create webservice client
+                org.rsi2.calculator.clients.CallbackService callbackService = new org.rsi2.calculator.clients.CallbackService();
+                org.rsi2.calculator.clients.CallbackWS callbackWS = callbackService.getCallbackWSPort();
+
+                // bind address
+                WSBindingProvider wSBindingProvider = (WSBindingProvider) callbackWS;
+                wSBindingProvider.setAddress(replyTo.getAddress());
+                wSBindingProvider.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+
+                // wywolanie metody w serwisie
+                callbackWS.callback("wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
             }
         } else {
             // log
@@ -224,13 +244,23 @@ public class CalculatorWS implements ICalculatorWS {
                 // send mail
                 MailUtils.sendMail(to.substring(7), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
             } else {
+                // log
+                logger.log(Level.SEVERE, "wysylam odpowiedz");
+
+                // get messageId
                 String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//                client.CalculatorImplService service = new client.CalculatorImplService();
-//                client.CalculatorImpl portType = service.getCalculatorImplPort();
-//                WSBindingProvider bp = (WSBindingProvider) portType;
-//                bp.setAddress(replyTo.getAddress());
-//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-//                portType.callbackMessage(result, "dodawanie");
+
+                // create webservice client
+                org.rsi2.calculator.clients.CallbackService callbackService = new org.rsi2.calculator.clients.CallbackService();
+                org.rsi2.calculator.clients.CallbackWS callbackWS = callbackService.getCallbackWSPort();
+
+                // bind address
+                WSBindingProvider wSBindingProvider = (WSBindingProvider) callbackWS;
+                wSBindingProvider.setAddress(replyTo.getAddress());
+                wSBindingProvider.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+
+                // wywolanie metody w serwisie
+                callbackWS.callback("wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
             }
         } else {
             // log
@@ -281,12 +311,6 @@ public class CalculatorWS implements ICalculatorWS {
             if (b == 0) {
                 // log
                 logger.log(Level.SEVERE, "dzielenie przez 0!");
-                
-//                WSEndpointReference faultTo = headerList.getFaultTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//                String faultToAddress = faultTo.getAddress();
-//                if (faultToAddress.equals("http://localhost:8080/WS_ADDRESSING_RSI/FaultLoggingService")) {
-//                    log("dzielenie przez 0!!! ");
-//                }
             } else {
                 result = a / b;
             }
@@ -305,13 +329,23 @@ public class CalculatorWS implements ICalculatorWS {
                 // send mail
                 MailUtils.sendMail(to.substring(7), "wynik dzielenia " + a + " i " + b + " wynosi " + result + " ");
             } else {
-//                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-//                client.CalculatorImplService service = new client.CalculatorImplService();
-//                client.CalculatorImpl portType = service.getCalculatorImplPort();
-//                WSBindingProvider bp = (WSBindingProvider) portType;
-//                bp.setAddress(replyTo.getAddress());
-//                bp.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
-//                portType.callbackMessage(result, "dodawanie");
+                // log
+                logger.log(Level.SEVERE, "wysylam odpowiedz");
+
+                // get messageId
+                String messageId = headerList.getMessageID(AddressingVersion.W3C, SOAPVersion.SOAP_11);
+
+                // create webservice client
+                org.rsi2.calculator.clients.CallbackService callbackService = new org.rsi2.calculator.clients.CallbackService();
+                org.rsi2.calculator.clients.CallbackWS callbackWS = callbackService.getCallbackWSPort();
+
+                // bind address
+                WSBindingProvider wSBindingProvider = (WSBindingProvider) callbackWS;
+                wSBindingProvider.setAddress(replyTo.getAddress());
+                wSBindingProvider.setOutboundHeaders(Headers.create(AddressingVersion.W3C.relatesToTag, messageId));
+
+                // wywolanie metody w serwisie
+                callbackWS.callback("wynik dzielenia " + a + " i " + b + " wynosi " + result + " ");
             }
         } else {
             // log
