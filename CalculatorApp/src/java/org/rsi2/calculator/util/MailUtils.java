@@ -32,7 +32,7 @@ public class MailUtils {
             message.setSubject("CalculatorService");
             message.setContent(msg, "text/plain");
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", 587, "atrzaska2@gmail.com", "948z5ls4kz");
+            transport.connect("smtp.gmail.com", 587, "karthaxx@gmail.com", "mazak5353");
             transport.sendMessage(message, message.getAllRecipients());
         } catch (AddressException ex) {
             Logger.getLogger(MailUtils.class.getName()).log(Level.SEVERE, null, ex);
