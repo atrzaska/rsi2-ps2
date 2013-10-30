@@ -89,7 +89,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(5), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(replyToAddress.substring(5), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
@@ -170,7 +170,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(5), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(replyToAddress.substring(5), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
@@ -251,7 +251,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(5), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(replyToAddress.substring(5), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
