@@ -54,9 +54,12 @@ public class CalculatorWS implements ICalculatorWS {
  
         // replyTo
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
-    
+
+        // get reply address
+        String replyToAddress = replyTo.getAddress();
+
         // log
-        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyToAddress);
         
         // to
         String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
@@ -64,7 +67,7 @@ public class CalculatorWS implements ICalculatorWS {
         // log
         logger.log(Level.SEVERE, "To: {0}", to);
 
-        if (!replyTo.isNone()) {
+        if (!replyTo.isAnonymous()) {
             // log
             logger.log(Level.SEVERE, "rozpoczynam dodawanie liczb {0} i {1}.", new Object[]{a, b});
 
@@ -78,7 +81,7 @@ public class CalculatorWS implements ICalculatorWS {
             logger.log(Level.SEVERE, "zakończyłem dodawnie liczb {0} i {1}.", new Object[]{a, b});
 
             // send email message
-            if (to.contains("mailto")) {
+            if (replyToAddress.contains("mail")) {
                 // log
                 logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
                 
@@ -86,7 +89,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(7), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(to.substring(5), "wynik dodawania " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
@@ -133,8 +136,11 @@ public class CalculatorWS implements ICalculatorWS {
         // replyTo
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
     
+        // get reply address
+        String replyToAddress = replyTo.getAddress();
+
         // log
-        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyToAddress);
         
         // to
         String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
@@ -142,7 +148,7 @@ public class CalculatorWS implements ICalculatorWS {
         // log
         logger.log(Level.SEVERE, "To: {0}", to);
 
-        if (!replyTo.isNone()) {
+        if (!replyTo.isAnonymous()) {
             // log
             logger.log(Level.SEVERE, "rozpoczynam odejmowanie liczb {0} i {1}.", new Object[]{a, b});
 
@@ -156,7 +162,7 @@ public class CalculatorWS implements ICalculatorWS {
             logger.log(Level.SEVERE, "zakończyłem odejmowanie liczb {0} i {1}.", new Object[]{a, b});
 
             // send email message
-            if (to.contains("mailto")) {
+            if (replyToAddress.contains("mail")) {
                 // log
                 logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
                 
@@ -164,7 +170,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(7), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(to.substring(5), "wynik odejmowania " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
@@ -211,16 +217,19 @@ public class CalculatorWS implements ICalculatorWS {
         // replyTo
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
     
+        // get reply address
+        String replyToAddress = replyTo.getAddress();
+
         // log
-        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
-        
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyToAddress);
+
         // to
         String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
 
         // log
         logger.log(Level.SEVERE, "To: {0}", to);
 
-        if (!replyTo.isNone()) {
+        if (!replyTo.isAnonymous()) {
             // log
             logger.log(Level.SEVERE, "rozpoczynam mnozenie liczb {0} i {1}.", new Object[]{a, b});
 
@@ -234,7 +243,7 @@ public class CalculatorWS implements ICalculatorWS {
             logger.log(Level.SEVERE, "zakończyłem mnozenie liczb {0} i {1}.", new Object[]{a, b});
 
             // send email message
-            if (to.contains("mailto")) {
+            if (replyToAddress.contains("mail")) {
                 // log
                 logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
                 
@@ -242,7 +251,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(7), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(to.substring(5), "wynik mnozenia " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
@@ -289,8 +298,11 @@ public class CalculatorWS implements ICalculatorWS {
         // replyTo
         WSEndpointReference replyTo = headerList.getReplyTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
     
+        // get reply address
+        String replyToAddress = replyTo.getAddress();
+
         // log
-        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyTo.getAddress());
+        logger.log(Level.SEVERE, "replyTo.getAddress: {0}", replyToAddress);
         
         // to
         String to = headerList.getTo(AddressingVersion.W3C, SOAPVersion.SOAP_11);
@@ -298,7 +310,7 @@ public class CalculatorWS implements ICalculatorWS {
         // log
         logger.log(Level.SEVERE, "To: {0}", to);
 
-        if (!replyTo.isNone()) {
+        if (!replyTo.isAnonymous()) {
             // log
             logger.log(Level.SEVERE, "rozpoczynam dzielenie liczb {0} i {1}.", new Object[]{a, b});
 
@@ -319,7 +331,7 @@ public class CalculatorWS implements ICalculatorWS {
             logger.log(Level.SEVERE, "zakończyłem dzielenie liczb {0} i {1}.", new Object[]{a, b});
 
             // send email message
-            if (to.contains("mailto")) {
+            if (replyToAddress.contains("mail")) {
                 // log
                 logger.log(Level.SEVERE, "wykryto adres email w polu reply.");
                 
@@ -327,7 +339,7 @@ public class CalculatorWS implements ICalculatorWS {
                 logger.log(Level.SEVERE, "wysyłam email.");
     
                 // send mail
-                MailUtils.sendMail(to.substring(7), "wynik dzielenia " + a + " i " + b + " wynosi " + result + " ");
+                MailUtils.sendMail(replyToAddress.substring(5), "wynik dzielenia " + a + " i " + b + " wynosi " + result + " ");
             } else {
                 // log
                 logger.log(Level.SEVERE, "wysylam odpowiedz");
